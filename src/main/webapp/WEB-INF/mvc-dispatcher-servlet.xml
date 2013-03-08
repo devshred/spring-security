@@ -15,7 +15,7 @@
     <bean id="expressionHandler"
           class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler">
         <property name="permissionEvaluator">
-            <bean class="org.devshred.security.SimplePermissionEvaluator"/>
+            <bean class="org.devshred.security.MessagePermissionEvaluator"/>
         </property>
     </bean>
 
@@ -24,12 +24,8 @@
     </sec:global-method-security>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix">
-            <value>/WEB-INF/pages/</value>
-        </property>
-        <property name="suffix">
-            <value>.jsp</value>
-        </property>
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
     </bean>
 
 </beans>

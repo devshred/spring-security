@@ -1,4 +1,4 @@
 package org.devshred.exception;
 
-public class ObjectNotFoundException extends Exception{
+public class ObjectNotFoundException extends Exception {
 }
