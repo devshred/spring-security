@@ -11,12 +11,14 @@ import org.devshred.model.Message;
 import org.devshred.service.MessageService;
 
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import static com.google.common.collect.Lists.newArrayList;
 
 
 @Service
+@PreAuthorize("isAuthenticated()")
 public class MessageServiceImpl implements MessageService {
 	private static final List<Message> messages = newArrayList();
 
@@ -28,6 +30,7 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
+    @PreAuthorize("#username == authentication.name or hasRole('ROLE_ADMIN')")
 	public Collection<Message> findByUsername(final String username) {
 		return Collections2.filter(messages, new Predicate<Message>() {
 				@Override

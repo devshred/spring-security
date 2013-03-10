@@ -6,12 +6,23 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
+    <beans:bean id="expressionHandler"
+          class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler">
+        <beans:property name="permissionEvaluator">
+            <beans:bean class="org.devshred.security.MessagePermissionEvaluator"/>
+        </beans:property>
+    </beans:bean>
+
+    <global-method-security pre-post-annotations="enabled">
+        <expression-handler ref="expressionHandler"/>
+    </global-method-security>
+
     <http use-expressions="true">
         <form-login/>
         <logout/>
     </http>
 
-    <authentication-manager>
+    <authentication-manager alias="authenticationManager">
         <authentication-provider>
             <user-service>
                 <user name="user" password="user" authorities="ROLE_USER"/>
